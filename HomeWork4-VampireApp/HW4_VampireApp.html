@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Bootstrap Example</title>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="repo.json"></script> 
+   <script type="text/javascript" src="main.js"></script> 
+   <script type="text/javascript" src="random.js"></script>
+    
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
+</head>
+<body>
+
+<div class="container">
+ <h2>Enter Your ClassMate Details</h2>
+  <form >
+    <div class="form-row">
+      <!-- md is short for Medium, >= 768 px -->
+      <div class="form-group col-md-4">
+        <label for="first_name">First Name</label>
+        <!-- possible types:  text, password, datetime, datetime-local, date, month, time, week, number, email, url, search, tel, and color. -->
+        <input type="text" class="form-control" id="first_name" placeholder="Frist Name">
+        <!-- <input type="time" class="form-control" id="first_name" placeholder="Frist Name"> -->
+        <!-- <input type="color" class="form-control" id="first_name" placeholder="Frist Name"> -->
+      </div>
+
+      <!-- The .form-group class is the easiest way to add some structure to forms. It provides a flexible class that encourages proper grouping of labels, controls, optional help text, and form validation messaging. -->
+      <div class="form-group col-md-4">
+        <label for="middle_name">Middle Name</label>
+        <input type="text" class="form-control" id="middle_name" placeholder="Middle Name">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name">
+      </div>
+    </div>
+
+
+   <div class="form-row">
+      <div class="form-group col-md-12">
+        <!-- same name so you can only select one option -->
+        <div class="radio">
+          <label><input type="radio" name="optradio" id="Male" checked>Male</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" id="Female">Female</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- without this, your rows will not be aligned -->
+      <div class="form-group col-md-12">
+        <div class="checkbox">
+          <label><input type="checkbox" id="garlic_checkbox">Garlic</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" id="shadow_checkbox">Shadow</label>
+        </div>
+		  <div class="checkbox">
+          <label><input type="checkbox" id="complexion_checkbox">Pale Complexion</label>
+        </div>
+      </div>
+    </div>
+	
+	<label for="mySelect">Select Model Logic:</label>
+    <select class="form-control" id="mySelect">
+      <option value='1'>Random Guess</option>
+      <option value='2'>Rule Based</option>      
+    </select>   
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+    </div>
+  </form>
+
+  <!-- How to display all user input information as a paragraph? Finish the output_user_info function -->
+  <button class="btn btn-primary" onclick="is_vampire()">Submit</button>
+  
+
+<hr>
+<H2>Result Details and Statistics</H2>
+<label for="myChangeSelect">Change Model Logic :</label>
+    <select class="form-control" id="myChangeSelect" onChange="change_Logic()" style="width:300px; padding-left=100px;">
+      <option value='1'>Random Guess</option>
+      <option value='2'>Rule Based</option>      
+    </select> 
+    
+  </div>	
+
+<div  id="table_div"></div>
+
+
+<!--</div> -->
+
+  <div style="padding-left:200px" id="chart_div"></div>
+  
+   
+</div>
+</body>
+</html>
