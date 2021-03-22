@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Bootstrap Example</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="repo.json"></script>
+   <script type="text/javascript" src="main.js"></script>
+   <script type="text/javascript" src="random.js"></script>
+
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+<br>
+  <!-- How to display all user input information as a paragraph? Finish the output_user_info function -->
+  <button class="btn btn-primary" onclick="document.location='creation.html'">Add Classmate</button>
+
+
+<hr>
+<H2>Result Details and Statistics</H2>
+<label for="myChangeSelect">Change Model Logic :</label>
+    <select class="form-control" id="myChangeSelect" onChange="change_Logic()" style="width:300px; padding-left=100px;">
+      <option value='1'>Random Guess</option>
+      <option value='2'>Rule Based</option>
+    </select>
+
+  </div>
+
+<div  id="table_div"></div>
+
+<!--</div> -->
+
+  <div style="padding-left:200px" id="chart_div"></div>
+
+
+</div>
+</body>
+</html>
