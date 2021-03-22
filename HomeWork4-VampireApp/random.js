@@ -120,7 +120,7 @@ function is_vampire_ByRandom(){
 	  $('#table_div').empty();
         // var magic
 		var student='';
-		student+=`<table class="table" id="table" ><caption>Result Details-Random Guess</caption><thead>
+		student+=`<table class="table" id="table" ><caption>Vampire Test Results by Random Guess Method</caption><thead>
       <tr>
         <th>Firstname</th>
         <th>Middlename</th>

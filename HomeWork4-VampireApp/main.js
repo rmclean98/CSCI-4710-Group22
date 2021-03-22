@@ -143,7 +143,7 @@ function is_vampire_ByCriteria(){
 	  $('#table_div').empty();
         // var magic
 		var student='';
-		student+=`<table class="table" id="table" ><caption>Result Details-RuleBased</caption><thead>
+		student+=`<table class="table" id="table" ><caption>Vampire Test Results by Rule Based Method</caption><thead>
       <tr>
         <th>Firstname</th>
         <th>Middlename</th>
