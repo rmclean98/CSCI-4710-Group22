@@ -15,20 +15,25 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="repo.json"></script>
+    <!-- <script type="text/javascript" src="repo.json"></script> -->
    <script type="text/javascript" src="main.js"></script>
    <script type="text/javascript" src="random.js"></script>
-
+	 
 
   <!-- If you want to use Google Chart, you need to import this library -->
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 <body>
+<div  class="container" style="border-style: ridge;">
+
+<div style="background-color:rgb(204, 0, 102);">
   <H1 style="text-align:center;"> Vampire Watch</H1>
+  </div>
+  <a href="index.html">Return to HomePage</a>
   <img style="display: block;margin-left: auto; margin-right: auto;" src="http://clipart-library.com/images/pcqKdkBLi.png" width="100" height="100">
-<div class="container">
- <h2>Enter Your ClassMate Details</h2>
+
+ <h2 style="background-color:rgba(238, 130, 238) ;display: inline-flex;">Enter Your ClassMate Details</h2>
   <form >
     <div class="form-row">
       <!-- md is short for Medium, >= 768 px -->
@@ -79,19 +84,22 @@
         </div>
       </div>
     </div>
-</div>
 
-	<label for="mySelect">Select Model Logic:</label>
+
+	<label for="mySelect" style="background-color:rgba(0, 255, 0) ;display: inline-flex;">Select Model Logic:</label>
     <select class="form-control" id="mySelect">
       <option value='1'>Random Guess</option>
       <option value='2'>Rule Based</option>
     </select>
-  </form>
+
 
 <br>
   <!-- How to display all user input information as a paragraph? Finish the output_user_info function -->
   <!--<a href="/index.html">-->
-  <button class="btn btn-primary" onclick="is_vampire(); document.location='index.html'" >Submit</button>
+  <button class="btn btn-primary" onclick="is_vampire(); document.location='index.html';" >Submit</button>
 
+    </form>
+	  
+</div>
 </body>
 </html>
