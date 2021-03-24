@@ -1,4 +1,3 @@
-var myName=repo
 
 function is_vampire_ByRandom(){
         // var magic
@@ -181,6 +180,24 @@ function is_vampire_ByRandom(){
                         $('#table_div').append(student); 
                    
 			}
+			else{
+				$('#table_div').empty();
+				var student='';
+		student+=`<table class="table" id="table" ><caption>Vampire Test Results by Random Guess Method</caption><thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Middlename</th>
+        <th>Lastname</th>
+		<th>Gender</th>
+		<th>Garlic</th>
+		<th>Pale</th>
+		<th>Shadow</th>
+		<th>Result</th>
+      </tr>
+    </thead> </table><br>
+	<p style="text-align:center;"> No Records </p>`;
+	$('#table_div').append(student);
+			}
 		});
 	  }
 	  
@@ -254,6 +271,7 @@ function is_vampire_ByRandom(){
         }
 		
 		});
+			}
 		
 		
 		//data.removeRow(1);
@@ -273,7 +291,6 @@ function is_vampire_ByRandom(){
         chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 		chart.draw(chartData, options);
 		
-		}
 		
 		
 		
