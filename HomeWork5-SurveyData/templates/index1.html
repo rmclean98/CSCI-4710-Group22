@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Vampire App</title>
+
+  <style>
+  .graphs{
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+  }
+  .container{
+    margin: auto;
+    width: 50%;
+  }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     
+      <script src="/static/js/index.js"></script>
+
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body onLoad="retrieveSurveyData()">
+<div  class="container" style="border-style: ridge;">
+
+  
+  <div style="background-color:rgb(204, 0, 102);">
+  <H1 style="text-align:center;"> Survey Details</H1>
+  </div>
+  <img style="display: block;margin-left: auto; margin-right: auto;" src="http://clipart-library.com/images/pcqKdkBLi.png" width="100" height="100"><br>
+  <!-- How to display all user input information as a paragraph? Finish the output_user_info function -->
+  
+  <H3 style="background-color:rgba(238, 130, 238) ;display: inline-flex;">Survey Data</H3>
+ 
+<br>
+<div class="graphs">
+<div  id="table_div"></div>
+
+<!--</div> -->
+
+  <div style="padding-left:200px" id="chart_div"></div>
+<!--{{response}} -->
+<p>Hello</p>
+</div>
+</div>
+</body>
+</html>
