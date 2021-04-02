@@ -113,6 +113,7 @@ def home():
     #return res
     #return render_template('index.html',group1=group1_list,group2=group2_list,group3=group3_list,group4=group4_list,countries=country_list) 
     return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2,group3=group3_list,country_list3=country_list3,group4=group4_list,country_list4=country_list4) 
+    #return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2) 
            
 @app.route('/upload', methods=['POST'])
 def upload_csv():

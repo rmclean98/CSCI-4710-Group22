@@ -20,8 +20,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="repo.json"></script>
-   <script type="text/javascript" src="main.js"></script>
+     
       <script src="/static/js/index.js"></script>
 
 
@@ -38,24 +37,12 @@
   </div>
   
   
-  </div>
+
  
 <br>
-<div class="container" style="border-style: ridge;">
- 
+
   
-    <!-- sm (for tablets - screens equal to or greater than 768px wide)
- -->
-    <!--<div class="col-sm-4" style="background-color:lavender;">.col-sm-8</div>
-    <div class="col-sm-4" style="background-color:lavenderblush;">.col-sm-8</div>
-    <div class="col-sm-4" style="background-color:lavender;">.col-sm-8</div>  -->
-
-
-
-<!--</div> -->
-<!--div class="row">
-<div class="col-sm-4"> -->
-  <div  style="height: 100%;">
+  <div  style="height: 100%">
     <H3 style='background-color:rgb(241, 115, 199)'>Group-1: Males with Age less than or equal to 35</H3>
   <div class="table-responsive"> 
   <table class="table table-striped table-bordered" id="dataTable1">
@@ -97,9 +84,10 @@
 					<td>{{ data }}</td>      
           {% endfor %}  
         
-         {% endif %}   
+           
           
 			   </tr>
+         {% endif %} 
 
        {% endfor %}
 
@@ -112,13 +100,13 @@
 </div> -->
 </div>
 
+<br>
+<br>
 
-
-
-<div  style="height: 100%;">
+<div >
   <H3 style='background-color:rgb(241, 115, 199)'>Group-2: Males with Age greater than or Equal to 36</H3>
   <div class="table-responsive"> 
-  <table class="table table-striped table-bordered" id="dataTable1">
+  <table class="table table-striped table-bordered" id="dataTable2">
 		<thead>
 		  <tr>
 			<caption style='background-color:rgb(156, 151, 223)'>Grouped By Country</caption>
@@ -157,9 +145,10 @@
 					<td>{{ data }}</td>      
           {% endfor %}  
         
-         {% endif %}   
+           
           
 			   </tr>
+         {% endif %} 
 
        {% endfor %}
 
@@ -172,12 +161,13 @@
 </div> -->
 </div>
 
-
+<br>
+<br>
 
 <div  style="height: 100%;">
   <H3 style='background-color:rgb(241, 115, 199)'>Group-3: Females with Age Less than or equal to Age35</H3>
   <div class="table-responsive"> 
-  <table class="table table-striped table-bordered" id="dataTable1">
+  <table class="table table-striped table-bordered" id="dataTable3">
 		<thead>
 		  <tr>
 			<caption style='background-color:rgb(156, 151, 223)'>Grouped By Country</caption>
@@ -231,12 +221,13 @@
 </div> -->
 </div>
 
-
+<br>
+<br>
 
 <div  style="height: 100%;">
   <H3 style='background-color:rgb(241, 115, 199)'>Group-4: Females with Age greater than or Equal to 36</H3>
   <div class="table-responsive"> 
-  <table class="table table-striped table-bordered" id="dataTable1">
+  <table class="table table-striped table-bordered" id="dataTable4">
 		<thead>
 		  <tr>
 			<caption style='background-color:rgb(156, 151, 223)'>Grouped By Country:</caption>
@@ -291,7 +282,10 @@
 </div>
 
 
-
 </div>
+
+
+
+
 </body>
 </html>
