@@ -49,8 +49,16 @@ class User(db.Model):
     addField2 = db.Column(db.String(500))
     addField3 = db.Column(db.String(500))
     
-    
-    
+
+db.create_all()
+
+app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
+with open('survey.csv', 'r') as file:
+    csv_reader = csv.reader(file, delimiter=',')
+    for row in csv_reader:
+        user = User(index=row[0], country=row[1],age = row[2],gender=row[3], fear = row[4], anxious = row[6], anger = row[6], happiness = row[7], sadness = row[8], emotionalBigImpact = row[9], reason = row[10], mostMeaning = row[11], occupation = row[12], addField1 = row[13], addField2 = row[14], addField3 = row[15])
+        db.session.add(user)
+        db.session.commit()    
     
     
     """ def __repr__(self):
@@ -62,13 +70,7 @@ class User(db.Model):
 def home():
     
         
-    app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
-    """  with open('survey.csv', 'r') as file:
-       csv_reader = csv.reader(file, delimiter=',')
-       for row in csv_reader:
-           user = User(index=row[0], country=row[1],age = row[2],gender=row[3], fear = row[4], anxious = row[6], anger = row[6], happiness = row[7], sadness = row[8], emotionalBigImpact = row[9], reason = row[10], mostMeaning = row[11], occupation = row[12], addField1 = row[13], addField2 = row[14], addField3 = row[15])
-           db.session.add(user)
-           db.session.commit()  """
+    
     
     
     # response="""<table class="table" id="table" >
@@ -118,13 +120,13 @@ def home():
 @app.route('/upload', methods=['POST'])
 def upload_csv():
     
-    with open('survey.csv', 'r') as file:
+    """ with open('survey.csv', 'r') as file:
         csv_reader = csv.reader(file, delimiter=',')
         for row in csv_reader:
             user = User(index=row[0], country=row[1],age = row[2], fear = row[3], anxious = row[4], anger = row[5], happiness = row[6], sadness = row[7], emotionalBigImpact = row[8], reason = row[9], mostMeaning = row[10], 
             occupation = row[11], addField1 = row[12], addField2 = row[13], addField3 = row[14])
             db.session.add(user)
-            db.session.commit()
+            db.session.commit() """
     #csv_file = request.files['survey.csv']
     #csv_file = TextIOWrapper(csv_file, encoding='utf-8')
     #app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
@@ -280,7 +282,7 @@ def getGroup4Records():
 
 if __name__ == '__main__':
     # get current app directory
-    db.create_all()
+    
     if app.debug:
         app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
     app.run(debug = True, port=5287)

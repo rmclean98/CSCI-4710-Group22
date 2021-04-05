@@ -52,7 +52,7 @@
 		  </tr>
       <tr>
         
-        <th>Index</th>
+        <!-- <th>Index</th> -->
        <th>Country</th>
        <th>Age</th>
        <th>Gender</th>
@@ -79,9 +79,16 @@
    {% for row in group1 %} 
         {% if row[1] ==country %} 
 			   <tr>
+          {% set count = namespace(value=0) %}
           {% for data in row %}
          
-					<td>{{ data }}</td>      
+          {% if count.value>0 %} 
+         
+					<td>{{ data }}</td> 
+          
+          {% endif %} 
+          {% set count.value = count.value + 1 %} 
+              
           {% endfor %}  
         
            
@@ -113,7 +120,7 @@
 		  </tr>
       <tr>
         
-        <th>Index</th>
+        <!-- <th>Index</th> -->
        <th>Country</th>
        <th>Age</th>
        <th>Gender</th>
@@ -139,10 +146,17 @@
         </tr> 
    {% for row in group2 %} 
         {% if row[1] ==country %} 
-			   <tr>
+        <tr>
+          {% set count = namespace(value=0) %}
           {% for data in row %}
          
-					<td>{{ data }}</td>      
+          {% if count.value>0 %} 
+         
+					<td>{{ data }}</td> 
+          
+          {% endif %} 
+          {% set count.value = count.value + 1 %} 
+              
           {% endfor %}  
         
            
@@ -174,7 +188,7 @@
 		  </tr>
       <tr>
        
-        <th>Index</th>
+        <!-- <th>Index</th> -->
        <th>Country</th>
        <th>Age</th>
        <th>Gender</th>
@@ -200,15 +214,24 @@
         </tr> 
    {% for row in group3 %} 
         {% if row[1] ==country %} 
-			   <tr>
+        <tr>
+          {% set count = namespace(value=0) %}
           {% for data in row %}
          
-					<td>{{ data }}</td>      
+          {% if count.value>0 %} 
+         
+					<td>{{ data }}</td> 
+          
+          {% endif %} 
+          {% set count.value = count.value + 1 %} 
+              
           {% endfor %}  
         
-         {% endif %}   
+           
           
 			   </tr>
+
+         {% endif %} 
 
        {% endfor %}
 
@@ -234,7 +257,7 @@
 		  </tr>
         <tr>
         
-         <th>Index</th>
+         <!-- <th>Index</th> -->
         <th>Country</th>
         <th>Age</th>
         <th>Gender</th>
@@ -260,15 +283,23 @@
         </tr> 
    {% for row in group4 %} 
         {% if row[1] ==country %} 
-			   <tr>
+        <tr>
+          {% set count = namespace(value=0) %}
           {% for data in row %}
          
-					<td>{{ data }}</td>      
+          {% if count.value>0 %} 
+         
+					<td>{{ data }}</td> 
+          
+          {% endif %} 
+          {% set count.value = count.value + 1 %} 
+              
           {% endfor %}  
         
-         {% endif %}   
+           
           
 			   </tr>
+         {% endif %} 
 
        {% endfor %}
 
