@@ -7,7 +7,7 @@ $(document).ready(function() {
     for (i = 0; i < totalPages; i++) {
         $('<span id="span1"><a id="d1' + (i+1) + '">&nbsp;' + (i + 1) + '</a></span>').appendTo($pages);
     }
-    $pages.appendTo('#dataTable1');
+    $pages.appendTo('#dataTablediv1');
 	$('#d11').css('color', 'black');
     $('.pageNumber').hover( function() {
         $(this).addClass('focus');
@@ -47,7 +47,7 @@ $(document).ready(function() {
     for (i = 0; i < totalPages; i++) {
         $('<span id="span2"><a id="d2' + (i+1) + '">&nbsp;' + (i + 1) + '</a></span>').appendTo($pages);
     }
-    $pages.appendTo('#dataTable2');
+    $pages.appendTo('#dataTablediv2');
 	$('#d21').css('color', 'black');
     $('.pageNumber').hover( function() {
         $(this).addClass('focus');
@@ -88,7 +88,7 @@ $(document).ready(function() {
     for (i = 0; i < totalPages; i++) {
         $('<span id="span3"><a id="d3' + (i+1) + '">&nbsp;' + (i + 1) + '</a></span>').appendTo($pages);
     }
-    $pages.appendTo('#dataTable3');
+    $pages.appendTo('#dataTablediv3');
 	$('#d31').css('color', 'black');
     $('.pageNumber').hover( function() {
         $(this).addClass('focus');
@@ -129,7 +129,7 @@ $(document).ready(function() {
     for (i = 0; i < totalPages; i++) {
         $('<span id="span4"><a id="d4' + (i+1) + '">&nbsp;' + (i + 1) + '</a></span>').appendTo($pages);
     }
-    $pages.appendTo('#dataTable4');
+    $pages.appendTo('#dataTablediv4');
 	$('#d41').css('color', 'black');
     $('.pageNumber').hover( function() {
         $(this).addClass('focus');
