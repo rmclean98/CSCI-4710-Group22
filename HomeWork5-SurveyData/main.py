@@ -19,7 +19,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] =\
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG'] = True
 
+if os.path.exists(os.path.join(basedir, 'data.sqlite')):
+    os.remove(os.path.join(basedir, 'data.sqlite'))
+
 db = SQLAlchemy(app)
+
 
 
 
