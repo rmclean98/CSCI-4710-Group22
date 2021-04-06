@@ -1,9 +1,9 @@
 function retrieveSurveyData(){
 $(document).ready(function() {
     var totalRows = $('#dataTable1').find('tbody tr:has(td)').length;
-    var recordPerPage = 25;
+    var recordPerPage = 15;
     var totalPages = Math.ceil(totalRows / recordPerPage);
-    var $pages = $('<div id="pages"><div></div></div>');
+    var $pages = $('<div id="pages"></div>');
     for (i = 0; i < totalPages; i++) {
         $('<span id="span1"><a id="d1' + (i+1) + '">&nbsp;' + (i + 1) + '</a></span>').appendTo($pages);
     }
@@ -19,7 +19,7 @@ $(document).ready(function() {
     for (var i = 0; i <= recordPerPage - 1; i++) { 
         $(tr[i]).show();
     }
-    $('div span#span1').click(function(event) {
+    $('span#span1').click(function(event) {
         $('#dataTable1').find('tbody tr:has(td)').hide();
         var nBegin = ($(this).text() - 1) * recordPerPage;
         var nEnd = $(this).text() * recordPerPage - 1;
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var totalRows = $('#dataTable2').find('tbody tr:has(td)').length;
-    var recordPerPage = 25;
+    var recordPerPage = 15;
     var totalPages = Math.ceil(totalRows / recordPerPage);
     var $pages = $('<div id="pages"></div>');
     for (i = 0; i < totalPages; i++) {
@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var totalRows = $('#dataTable3').find('tbody tr:has(td)').length;
-    var recordPerPage = 25;
+    var recordPerPage = 15;
     var totalPages = Math.ceil(totalRows / recordPerPage);
     var $pages = $('<div id="pages"></div>');
     for (i = 0; i < totalPages; i++) {
@@ -123,7 +123,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     var totalRows = $('#dataTable4').find('tbody tr:has(td)').length;
-    var recordPerPage = 25;
+    var recordPerPage = 15;
     var totalPages = Math.ceil(totalRows / recordPerPage);
     var $pages = $('<div id="pages"></div>');
     for (i = 0; i < totalPages; i++) {

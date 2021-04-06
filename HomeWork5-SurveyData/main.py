@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 from io import TextIOWrapper
+
 import csv
 import os
 from flask import Flask, request, redirect, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.debug import DebuggedApplication
 import util
+from sqlalchemy import func
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -69,52 +71,80 @@ with open('survey.csv', 'r') as file:
 @app.route('/', methods=['GET'])
 def home():
     
-        
-    
-    
-    
-    # response="""<table class="table" id="table" >
-    # <caption>Survey Statistics</caption>
-    
-      
-    #country_list=getCountries()
+
     group1_list,country_list1= getGroup1Records()
+    
+    group1_clusters=[]
+    group1recordsByCountry=getGroup1RecordsCountbyCountry()
+    for totalrecords in group1recordsByCountry:
+        if totalrecords[1]>=10:
+            kmeans_calc_group=[]
+            for item in group1_list:
+                if item[1] == totalrecords[0]:                    
+                    kmeans_calc_group.append(item)
+
+            group_labels = util.cluster_user_data(kmeans_calc_group)
+            group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+            group1_clusters.append(group_clusters)
+
+    
     group2_list,country_list2= getGroup2Records()
+    
+    group2_clusters=[]
+    group2recordsByCountry=getGroup2RecordsCountbyCountry()
+    for totalrecords in group2recordsByCountry:
+        if totalrecords[1]>=10:
+            kmeans_calc_group=[]
+            for item in group2_list:
+                if item[1] == totalrecords[0]:                    
+                    kmeans_calc_group.append(item)
+
+            group_labels = util.cluster_user_data(kmeans_calc_group)
+            group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+            group2_clusters.append(group_clusters)     
+
+    
+
     group3_list,country_list3= getGroup3Records()
+    
+    group3_clusters=[]
+    group3recordsByCountry=getGroup3RecordsCountbyCountry()
+    for totalrecords in group3recordsByCountry:
+        if totalrecords[1]>=10:
+            kmeans_calc_group=[]
+            for item in group3_list:
+                if item[1] == totalrecords[0]:                    
+                    kmeans_calc_group.append(item)
+
+            group_labels = util.cluster_user_data(kmeans_calc_group)
+            group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+            group3_clusters.append(group_clusters) 
+
+    
+
+
     group4_list,country_list4= getGroup4Records()
     
+    group4_clusters=[]
+    group4recordsByCountry=getGroup4RecordsCountbyCountry()
+    for totalrecords in group4recordsByCountry:
+        if totalrecords[1]>=10:
+            kmeans_calc_group=[]
+            for item in group4_list:
+                if item[1] == totalrecords[0]:                    
+                    kmeans_calc_group.append(item)
+
+            group_labels = util.cluster_user_data(kmeans_calc_group)
+            group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+            group4_clusters.append(group_clusters) 
+        
     #records=User.query.all()
         
-
-    #record_dict = {	'user_data':records}
-
     
-
-      
-   			
-						
-    # response +='</table>'
-           #"""
-        
-        
-    #response="""
-            #<form method='post' action='/upload' enctype='multipart/form-data'>
-              #Upload a csv file: <input type='file' name='file'>
-              #<input type='submit' value='Upload'>
-            #</form>
-           #"""
-    #return render_template('index.html', log_html=response)
-    #render_template('index.html',response=records)
-    
-    #res= """
-            #<form method='post' action='/upload' enctype='multipart/form-data'>
-              #Upload a csv file: <input type='file' name='file'>
-              #<input type='submit' value='Upload'>
-            #</form>
-           #"""
-    #return res
+   
     #return render_template('index.html',group1=group1_list,group2=group2_list,group3=group3_list,group4=group4_list,countries=country_list) 
-    return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2,group3=group3_list,country_list3=country_list3,group4=group4_list,country_list4=country_list4) 
+    #return render_template('index.html',group1=group1_list,country_list1=group1recordsByCountry,group1Kmeans=group1_clusters,group2=group2_list,country_list2=country_list2,group3=group3_list,country_list3=country_list3,group4=group4_list,country_list4=country_list4) 
+    return render_template('index.html',group1=group1_list,country_list1=group1recordsByCountry,group1Kmeans=group1_clusters,group2=group2_list,country_list2=group2recordsByCountry,group2Kmeans=group2_clusters,group3=group3_list,country_list3=group3recordsByCountry,group3Kmeans=group3_clusters,group4=group4_list,country_list4=group4recordsByCountry,group4Kmeans=group4_clusters) 
     #return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2) 
            
 @app.route('/upload', methods=['POST'])
@@ -138,6 +168,77 @@ def upload_csv():
     #return redirect(url_for('upload_csv'))
     return render_template('index.html', log_html=User.query.all())
     
+
+def getGroup1RecordsCountbyCountry():
+   
+    records=User.query.with_entities(User.country, db.func.count(User.country).label('total')).filter(User.age<=35).filter(User.gender=='Male').group_by(User.country).all();
+    #records=surveyUser.query.filter(temp1).filter(temp2).all()
+    list1=[]
+    
+    #group3_records=User.query.filter(User.age<=35).filter(User.gender=='Female').group_by(User.country).all()
+    #group4_records=User.query.filter(User.age>=36).filter(User.gender=='Female').group_by(User.country).all()
+    for record in records:
+        list2=[]        
+        list2.append(record.country)
+        list2.append(record.total)
+        list1.append(list2)
+
+    return list1
+
+
+def getGroup2RecordsCountbyCountry():
+   
+    records=User.query.with_entities(User.country, db.func.count(User.country).label('total')).filter(User.age>=36).filter(User.gender=='Male').group_by(User.country).all();
+    #records=surveyUser.query.filter(temp1).filter(temp2).all()
+    list1=[]
+    
+    #group3_records=User.query.filter(User.age<=35).filter(User.gender=='Female').group_by(User.country).all()
+    #group4_records=User.query.filter(User.age>=36).filter(User.gender=='Female').group_by(User.country).all()
+    for record in records:
+        list2=[]        
+        list2.append(record.country)
+        list2.append(record.total)
+        list1.append(list2)
+
+    return list1
+
+
+
+def getGroup3RecordsCountbyCountry():
+   
+    records=User.query.with_entities(User.country, db.func.count(User.country).label('total')).filter(User.age<=35).filter(User.gender=='Female').group_by(User.country).all();
+    #records=surveyUser.query.filter(temp1).filter(temp2).all()
+    list1=[]
+    
+    #group3_records=User.query.filter(User.age<=35).filter(User.gender=='Female').group_by(User.country).all()
+    #group4_records=User.query.filter(User.age>=36).filter(User.gender=='Female').group_by(User.country).all()
+    for record in records:
+        list2=[]        
+        list2.append(record.country)
+        list2.append(record.total)
+        list1.append(list2)
+
+    return list1
+
+
+
+def getGroup4RecordsCountbyCountry():
+   
+    records=User.query.with_entities(User.country, db.func.count(User.country).label('total')).filter(User.age>=36).filter(User.gender=='Female').group_by(User.country).all();
+    #records=surveyUser.query.filter(temp1).filter(temp2).all()
+    list1=[]
+    
+    #group3_records=User.query.filter(User.age<=35).filter(User.gender=='Female').group_by(User.country).all()
+    #group4_records=User.query.filter(User.age>=36).filter(User.gender=='Female').group_by(User.country).all()
+    for record in records:
+        list2=[]        
+        list2.append(record.country)
+        list2.append(record.total)
+        list1.append(list2)
+
+    return list1
+
+
 
 def getGroup1Records():
    
