@@ -2,6 +2,8 @@ Example 39: This project shows how to integrate a database in your web app.
 
 ## Quick Start
 ### Local Test Setup
+There is no setup required for the database if you have the requirements installed then, the python file will create the database locally.
+
 First, we need to install a Python 3 virtual environment with:
 ```
 sudo apt update
@@ -18,7 +20,7 @@ You need to activate the virtual environment when you want to use it:
 source python_venv/bin/activate
 ```
 
-To fufil all the requirements for the python server, you need to run:
+To fulfill all the requirements for the python server, you need to run:
 ```
 pip3 install -r requirements.txt
 ```
