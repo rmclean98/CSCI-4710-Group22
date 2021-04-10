@@ -62,3 +62,5 @@ Table 4: Females with Age greater than or equal to 36
 Grouped By Country and Clustered using Kmeans for groups with more than 10 records.
 First 15 records are displayed here. Please click on the pagination to access next set of records in each table
 ```
+
+This project was developed and tested on Ubuntu
