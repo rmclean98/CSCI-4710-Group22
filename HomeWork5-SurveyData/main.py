@@ -53,7 +53,7 @@ class User(db.Model):
 db.create_all()
 
 app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
-with open('survey.csv', 'rb') as file:
+with open('survey.csv', 'r') as file:
     csv_reader = csv.reader(file, delimiter=',')
     for row in csv_reader:
         user = User(index=row[0], country=row[1],age = row[2],gender=row[3], fear = row[4], anxious = row[6], anger = row[6], happiness = row[7], sadness = row[8], emotionalBigImpact = row[9], reason = row[10], mostMeaning = row[11], occupation = row[12], addField1 = row[13], addField2 = row[14], addField3 = row[15])
