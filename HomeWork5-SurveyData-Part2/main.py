@@ -157,7 +157,7 @@ def surveyDetails(country):
             group4_clusters.append(group_clusters) 
         
     
-    return render_template('surveyDetails.html',group1=group1_list,country_list1=group1recordsByCountry,group1Kmeans=group1_clusters,group2=group2_list,country_list2=group2recordsByCountry,group2Kmeans=group2_clusters,group3=group3_list,country_list3=group3recordsByCountry,group3Kmeans=group3_clusters,group4=group4_list,country_list4=group4recordsByCountry,group4Kmeans=group4_clusters,countryName=countryName) 
+    return render_template('surveyDetails.html',group1=group1_list,country_list1=group1recordsByCountry,group1Kmeans=group1_clusters,group2=group2_list,country_list2=group2recordsByCountry,group2Kmeans=group2_clusters,group3=group3_list,country_list3=group3recordsByCountry,group3Kmeans=group3_clusters,group4=group4_list,country_list4=group4recordsByCountry,group4Kmeans=group4_clusters,countryName=country) 
     
 
 
