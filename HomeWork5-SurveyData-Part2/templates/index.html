@@ -1,0 +1,72 @@
+<!-- This example is based on https://github.com/markmarkoh/datamaps -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="https://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+    </head>
+
+    <body>
+      <div  class="container" style="border-style: ridge;">
+
+  
+        <div style="background-color:rgb(204, 0, 102);">
+        <H1 style="text-align:center;"> Survey Details</H1>
+        </div>
+        
+        
+      
+       
+      <br>
+
+      <div  style="display: flex;
+      justify-content: center;">
+        <div id="container" style="position: relative; width: 900px; height: 600px;"></div>
+        <script>
+            var jsonfile =JSON.parse({{countries_json|tojson|safe}});
+            var surveyListData={}            
+            var surveyText= { fillKey: 'WITH_SURVEY_DATA'}
+
+            for (var key in jsonfile) {
+              var temp={}
+              surveyListData[key]=surveyText           
+            
+            }
+
+            //console.log(surveyListData)
+            var map = new Datamap({
+                element: document.getElementById('container'),
+                fills: {
+                    WITH_SURVEY_DATA: '#43a4ff',
+                    defaultFill: 'green'
+                },
+                data: surveyListData
+            });
+
+            // Draw a legend for this map
+            map.legend();
+
+            map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+            country=geography.properties.name;
+
+            $.get('/details/' + country, function(response) {
+              var win=window.open('about:blank');
+              with(win.document)
+              {
+                  open();
+                  write(response);
+                  close();
+                  //console.log(status)
+              }
+                  
+                });
+
+          });
+        </script>
+        </div>
+      </div>
+    </body>
+</html>
