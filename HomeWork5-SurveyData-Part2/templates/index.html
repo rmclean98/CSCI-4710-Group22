@@ -21,8 +21,9 @@
       
         
         <p> 
-        Click the country to view the detailed survey results in new tab
-      </p> <br>  
+        Click the country to view the detailed survey results in a new tab        
+      </p> 
+      <div  id="marker_note"></div> <br>  
        
       <br>
 
@@ -52,6 +53,8 @@
 
             // Draw a legend for this map
             map.legend();
+            $('.datamaps-legend').appendTo('#marker_note')
+            $('.datamaps-legend').css({"padding":"50px"});
 
             map.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
             country=geography.properties.name;
