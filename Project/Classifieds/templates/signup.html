@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Classifieds</title>
+
+  <style>
+  .graphs{
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+  }
+  .container{
+    margin: auto;
+    width: 50%;
+  }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.cookie.js"></script>
+
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="../static/js/welcome.js"></script>
+   
+   <link rel="stylesheet" src="../templates/home.css" type= "text/css">
+
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+<div  class="container" style="border-style: ridge;">
+
+    
+  <div width=100% >
+    <div align='center' class='logo' >
+      <img src="/static/logo.png" width= 600px height =90px />
+      </div>
+
+
+</div>
+
+
+<div align="justify">
+
+		<H2>Registration Form:</H2>
+		
+        <FORM ACTION="" METHOD="POST" enctype='Application/x-www-form-urlencoded'>
+        
+            
+              Email Id:
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Email"> 
+            <BR>
+            <BR>
+             First Name:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px"  class="form-control" NAME="Fname"> 
+            <BR>
+            <BR>
+			Last Name:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="Lname"> 
+            <BR>
+            <BR>
+			Date of Birth:(MMDDYYYY)
+             <input type="text" name="datepicker" id="datepicker" class="form-control" style="width:150px"  >
+             <BR>
+			 <BR>
+			 Address:    
+            <BR>
+            <textarea style="width:500px" NAME="Address" class="form-control"> </textarea>
+            <!--  <INPUT TYPE="TEXT" maxlength="3000"  NAME="Description"> -->   
+            <BR>
+            <BR>
+			City:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px"  class="form-control" NAME="City"> 
+            <BR>
+			<BR>
+            State:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="State"> 
+            <BR>            
+			<BR>
+            Country:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Country"> 
+            <BR>            
+			<BR>
+            Zip:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="Zip"> 
+            <BR>
+            <BR>
+            
+            Phone:           
+            <BR>
+            <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Phone"> 
+            <BR>
+            <BR>
+			
+			<div>
+			<label for="pass">Password (8 characters minimum):</label>
+			<input type="password" id="pass" class="form-control" name="Password"
+				   minlength="8" required  maxlength="30" style="width:400px">
+			</div>
+                           <!-- <div id="calendar">
+            <p id="calendar-day"></p>
+            <p id="calendar-date"></p>
+            <p id="calendar-month-year"></p> 
+      		 </div> -->
+      		<BR>
+			<BR>
+			
+            <INPUT  TYPE="SUBMIT" style="margin-left: 100px; width: 325px; margin-left:400px" class="btn btn-info btn-block btn-round" value="Submit">
+            <BR>
+            <BR>
+ 		</FORM>
+ 		</div>
+ <BR>
+ <BR>
+ 
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <div align='right'>
+ <footer  style="background-color: rgb(0, 255, 120)" > Contact admin over email (admin@classifieds.com) in case you face any technical issues</footer>
+</div>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
