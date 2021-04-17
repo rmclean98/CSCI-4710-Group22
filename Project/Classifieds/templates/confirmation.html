@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Classifieds</title>
+
+  <style>
+  .graphs{
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+  }
+  .container{
+    margin: auto;
+    width: 50%;
+  }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="../static/js/confirmation.js"></script>
+   
+   
+   <link rel="stylesheet" src="../templates/myhome.css" type= "text/css">
+
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>{{confirmMessage1}}<BR>{{confirmMessage2}}</p>
+          <hr>
+        </div>
+        <button type="button" id="Agreebutton" class="btn btn-info btn-block btn-round" onClick="location.href='{{redirection}}'">Ok</button>
+      </div>
+        </div>
+      </div>
+    
+</div>
+
+</body>
+</html>

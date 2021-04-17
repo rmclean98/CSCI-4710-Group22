@@ -46,10 +46,11 @@ def signup():
         
         createUser(request)    
         
-        #recentAdslist=getRecentAds()
-        #session['username']='Guest'
-
-        return redirect(url_for('home')) 
+        confirmMessage1='Aww yeah, your registration is completed successfully!!!'
+        confirmMessage2='Please login with your user credentials from the homepage.'
+        redirection='/classifieds'
+        return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection) 
+        #return redirect(url_for('home')) 
            
             #resp =make_response(render_template('index.html',recentAdslist=recentAdslist))
              
@@ -167,6 +168,15 @@ def assets(filename):
   return send_from_directory(assets_folder, filename)
 
 
+@app.route('/classifieds/static/js/<filename>')
+def staticAssets(filename):
+  # Add custom handling here.
+  # Send a file download response.
+  assets_folder = os.path.join('', 'static/js')
+  return send_from_directory(assets_folder, filename)
+
+
+
 @app.route('/classifieds/postad', methods=['GET','POST'])
 def postad():
 
@@ -175,6 +185,7 @@ def postad():
         if 'Authenticated' in request.cookies:
 
             if request.cookies.get('Authenticated') =='Yes':
+                
                 resp =make_response(render_template('postad.html',session_variable=str(session['username'])))
                 
             else:
@@ -216,12 +227,16 @@ def postad():
                 myAdsList=getMyAds(session['username'])
                 #resp =make_response(render_template('home.html',session_variable1=str(session['username']),recentAdslist=recentAdslist,myAdsList=myAdsList))
                 #resp.set_cookie('adPosted', 'Yes')
-                resp= redirect(url_for('home')) 
+
+                confirmMessage1='Aww yeah, your Ad is posted successfully!!!'
+                confirmMessage2='Please verify if your Ad is displayed correctly in MyAds page'
+                redirection='/classifieds'
+                return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection) 
+                #resp= redirect(url_for('home')) 
+                
+                
                 
                 #return resp
-                #resp.set_cookie('Authenticated', 'Yes')
-                
-                return resp
             else:
                 resp =make_response(render_template('404_error.html',session_variable=str(session['username'])))
                 return resp
