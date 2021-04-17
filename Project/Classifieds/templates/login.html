@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <title>Vampire App</title>
+
+  <style>
+  .graphs{
+    margin: auto;
+    width: 50%;
+    border: 2px solid black;
+  }
+  .container{
+    margin: auto;
+    width: 50%;
+  }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="repo.json"></script>
+   <script type="text/javascript" src="main.js"></script>
+   <script type="text/javascript" src="random.js"></script>
+
+
+  <!-- If you want to use Google Chart, you need to import this library -->
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+
+<div  class="container" style="border-style: ridge;">
+
+  <script type="text/javascript">
+    $(function(){
+      //Getting values from session and saving in javascript variable.
+      // But this will be executed only at document.ready.
+      var firstName= {{session['username']|tojson}} 
+      console.log(firstName)   
+    });
+    </script>
+
+  
+  <div width=100% >
+<div align='center' class='logo' >
+<img src="resources/static/classifieds.jpg" width= 300px height =50px />
+</div>
+{% set temp=session['username']|tojson %}
+{% if session['username']|string() =="Guest" %}  
+<div class='sidebar'>
+Click on <a href="/classifieds/login">Login</a> to Post ads.<BR>
+Click  <a href="/classifieds/register">here</a> to Sign up.
+</div>
+{%  else %}
+<div class='sidebar'> 
+Click <a href="home.jsp?Login=No">here</a> to post  ads.
+</div>
+<div align="right"> <a href="logout">logout</a>
+</div>
+
+{% endif  %}
+
+</div>
+
+
+<div  class='main'>
+<H2>Search Classifieds:</H2> 
+
+      		<FORM ACTION="search_classifieds" METHOD="POST">
+            Search Product with Keywords:
+            <INPUT TYPE="TEXT" NAME="Search_for_Keyword" style="width:250px">
+            <BR>
+            <BR>
+            <LABEL>Type of Advertisement:</LABEL>
+            <SELECT  NAME="Ad_Type" style="width:150px">
+            <OPTION value= "Buy">Buy</OPTION>
+            <OPTION value= "Sell">Sell</OPTION>
+            <OPTION value= "Rent">Rent</OPTION>
+            <OPTION value= "Lease">Lease</OPTION>
+            <OPTION value= "NA">NA</OPTION>
+            </SELECT>            
+            <BR>
+            <BR>
+            <LABEL>Posted in:</LABEL>
+            <SELECT  NAME="posted_on" style="width:150px">
+            <OPTION value= "1w">Last Week</OPTION>
+            <OPTION value= "2w">Last 2Weeks</OPTION>
+            <OPTION value= "30d">Last 30days</OPTION>
+            <OPTION value= "all">Anytime</OPTION>
+            </SELECT>            
+            <BR>
+            <BR>
+            (Please select values for all dropdowns to get more accurate results)
+            <BR>
+            <BR>
+            <INPUT  style="margin-left: 220px; width: 150px"  TYPE="SUBMIT" value="Submit">
+ 		</FORM> 
+ 		<BR>		
+ </div>
+ <BR>
+ <BR>
+ <BR>
+ 		<div class='main'>
+ 		<H2>Recent Classifieds: </H2> 
+ 		<H3 style="color:#0000ff">View full details of the Ad in new tab by clicking on the details link</H3>
+ 		<div  style="height: 100%" >
+    <H3 style='background-color:rgb(241, 115, 199)'>Recent Posts:</H3>
+  <div class="table-responsive" id="dataTablediv1"> 
+  <table class="table table-striped table-bordered" id="dataTable1">
+		<thead>
+		  <tr>
+			<caption style='background-color:rgb(156, 151, 223)'>Recent 15 Advertisements posted by users are displayed here
+        </caption>
+		  </tr>
+      <tr>        
+        <!-- <th>Index</th> -->
+       <th>SNo</th>
+       <th>Title</th>
+       <th>Type</th>
+       <th>Expected Price</th>
+       <th>Payment Frequency</th>
+       <th>Posted Date</th>
+       <th>Details</th>        
+     </tr>
+		</thead>
+		<tbody>
+	
+      {% for advt in recentAdsList %}  
+      {% set count = namespace(value=1) %}      
+		<tr>
+		<td>{{count.value}}</td> 
+            
+        {% for data in advt %}              
+         
+		<td>{{ data }}</td> 
+          
+        {% endfor %}   
+        {% set count.value = count.value + 1 %} 
+              
+        </tr>           
+  
+       {% endfor %}
+    
+    </tbody>
+    </table>
+  </div>
+  <!-- </div>
+  </div> -->
+  </div>
+ 		<BR>
+ 		<BR>
+ 		</div>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <BR>
+ <div align='right'>
+ <footer  style="background-color: rgb(0, 255, 120)" > Contact admin over email (admin@classifieds.com) in case you face any technical issues</footer>
+</div>
+</div>
+</body>
+</html>
