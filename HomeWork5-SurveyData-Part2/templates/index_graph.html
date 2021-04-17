@@ -5,54 +5,35 @@
 <body>
 
 <script>
-    var w = 1500;
-    var h = 1000;
+    var w = 2500;
+    var h = 2000;
+    var jsonfile =JSON.parse({{countries_json|tojson|safe}});
+    console.log(jsonfile)
     // this part should be updated using GET request (get from your backend)
     // input topics as nodes
     // define links as edges, e.g. if you have 5 topics
     // then these topics index are 0, 1, 2, 3, 4
     var dataset = {
       nodes:[
-          {name:"Plate Tectonics"},
-          {name:"Minerals"},
-          {name:"Igneous Rocks"},
-          {name:"Sedimentary Rocks"},
-          {name:"Metamorphic Rocks"},
-          {name:"Volcanoes"},
-          {name:"Earthquakes"},
-          {name:"Dating Techniques"},
-          {name:"Geologic Time"},
-          {name:"Energy"},
-          {name:"Oceans"},
-          {name:"Groundwater"},
-          {name:"Surface Water"},
-          {name:"Earth Structure"},
-          {name:"Structural Geology"},
-          {name:"Earth Structure"},
-          {name:"Glaciers & Glaciations"}
-
       ],
       edges:[
-          {source: 0, target: 2},
-          {source: 0, target: 5},
-          {source: 0, target: 6},
-          {source: 2, target: 1},
-          {source: 2, target: 5},
-          {source: 6, target: 7},
-          {source: 6, target: 13},
-          {source: 6, target: 14},
-          {source: 7, target: 3},
-          {source: 14, target: 4},
-          {source: 8, target: 15},
-          {source: 8, target: 16},
-          {source: 15, target: 16},
-          {source: 16, target: 9},
-          {source: 16, target: 10},
-          {source: 11, target: 12}
-
       ]
     };
+    var count = 0;
+    for (id in jsonfile){
+      if(jsonfile.hasOwnProperty(id)) {
+        var value = {name:jsonfile[id]};
+        var group1 = {name:"Males <= 35"}
+        var group2 = {name:"Males >= 35"}
+        var group3 = {name:"Females <= 35"}
+        var group4 = {name:"Females >= 35"}
+        dataset.nodes.push(value, group1, group2, group3, group4)
+        dataset.edges.push({source:count, target:count+1}, {source:count, target:count+2}, {source:count, target:count+3}, {source:count, target:count+4})
+        count += 5;
+      }
+    }
 
+    console.log(dataset)
     // Constructs a new force-directed layout, used for graph a lot
     var force = d3.layout.force()
                 // the nodes of a graph

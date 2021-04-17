@@ -70,10 +70,26 @@ with open('survey.csv', 'r') as file:
 
 @app.route('/ontology', methods=['GET'])
 def ontology():
-    countryNames = getCountriesList()
-    print(countryNames)
-    print('hi')
-    return render_template('index_graph.html')
+    d3_List={'USA':' United States of America',
+    'CHE':'Switzerland',
+    'ROU':'Romania',
+    'GBR':' United Kingdom',
+    'COL':'Colombia',
+    'CAN':'Canada',
+    'AUS':'Australia',
+    'FRA':'France',
+    'DEU':'Germany',
+    'CYP':'Cyprus',
+    'RWA':'Rwanda',
+    'ISR':'Israel',
+    'PRT':'Portugal',
+    'IRL':' Ireland',
+    'NZL':'New Zealand',
+    'CHN':'China',
+    'ESP':'spain'}
+
+    countries_json = json.dumps(d3_List)
+    return render_template('index_graph.html', countries_json=countries_json)
 
 
 @app.route('/details/<country>', methods=['GET'])
