@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!-- this code is based on https://stackoverflow.com/questions/37640027/add-text-label-to-d3-node-in-force-layout -->
+<script src="static/js/d3.v3.min.js"></script>
+<body>
+
+<script>
+    var w = 1500;
+    var h = 1000;
+    // this part should be updated using GET request (get from your backend)
+    // input topics as nodes
+    // define links as edges, e.g. if you have 5 topics
+    // then these topics index are 0, 1, 2, 3, 4
+    var dataset = {
+      nodes:[
+          {name:"Plate Tectonics"},
+          {name:"Minerals"},
+          {name:"Igneous Rocks"},
+          {name:"Sedimentary Rocks"},
+          {name:"Metamorphic Rocks"},
+          {name:"Volcanoes"},
+          {name:"Earthquakes"},
+          {name:"Dating Techniques"},
+          {name:"Geologic Time"},
+          {name:"Energy"},
+          {name:"Oceans"},
+          {name:"Groundwater"},
+          {name:"Surface Water"},
+          {name:"Earth Structure"},
+          {name:"Structural Geology"},
+          {name:"Earth Structure"},
+          {name:"Glaciers & Glaciations"}
+
+      ],
+      edges:[
+          {source: 0, target: 2},
+          {source: 0, target: 5},
+          {source: 0, target: 6},
+          {source: 2, target: 1},
+          {source: 2, target: 5},
+          {source: 6, target: 7},
+          {source: 6, target: 13},
+          {source: 6, target: 14},
+          {source: 7, target: 3},
+          {source: 14, target: 4},
+          {source: 8, target: 15},
+          {source: 8, target: 16},
+          {source: 15, target: 16},
+          {source: 16, target: 9},
+          {source: 16, target: 10},
+          {source: 11, target: 12}
+
+      ]
+    };
+
+    // Constructs a new force-directed layout, used for graph a lot
+    var force = d3.layout.force()
+                // the nodes of a graph
+                .nodes(dataset.nodes)
+                // the edges of a graph
+                .links(dataset.edges)
+                // the size of the graph
+                .size([w, h])
+                .linkDistance([200])
+                // the strength of the force
+                .charge([-1200])
+                // start the force
+                // The force layout runs asynchronously. That is, when you call force.start()
+                .start();
+
+    // ten default colors from d3
+    // example: http://bl.ocks.org/aaizemberg/78bd3dade9593896a59d
+    var colors = d3.scale.category10();
+
+    // create a svg element
+    var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+    // dynamically create graph edges
+    var edges = svg.selectAll("line")
+            .data(dataset.edges)
+            // .enter() creates the initial join of data to elements
+            // this can be very complex, please use it here for now
+            // later we may introduce these type of functions
+            .enter()
+            .append("line")
+            // line color
+            .style("stroke", "#ccc")
+            // line width
+            .style("stroke-width", 1);
+
+    // dynamically create graph nodes
+    var nodes = svg.selectAll("circle")
+            .data(dataset.nodes)
+            .enter()
+            // circle shape
+            .append("circle")
+            // radius is 10
+            .attr("r", 10)
+            // fill colors, this is defined by using category10();
+            .style("fill", function(d, i){
+              return colors(i);
+            })
+            // allow users to drag nodes
+            .call(force.drag);
+
+    // dynamically create labels
+    var label = svg.selectAll(".mytext")
+            .data(dataset.nodes)
+            .enter()
+            .append("text")
+              .text(function (d) { return d.name; })
+              // where we want to render the label, start | middle | end
+              .style("text-anchor", "middle")
+              // color
+              .style("fill", "#555")
+              .style("font-family", "Arial")
+              .style("font-size", 12);
+
+
+    // read this: https://stackoverflow.com/questions/28745398/why-do-we-need-force-ontick-in-d3
+    // The tick handler is the function that enables you to get the state of the layout when it has changed
+    // (the simulation has advanced by a tick) and act on it -- in particular,
+    // redraw the nodes and links where they currently are in the simulation.
+    force.on("tick", function(){
+      edges.attr("x1", function(d){ return d.source.x; })
+         .attr("y1", function(d){ return d.source.y; })
+         .attr("x2", function(d){ return d.target.x; })
+         .attr("y2", function(d){ return d.target.y; });
+      nodes.attr("cx", function(d){ return d.x; })
+         .attr("cy", function(d){ return d.y; });
+      label.attr("x", function(d){ return d.x; })
+           .attr("y", function (d) {return d.y - 10; });
+
+
+    });
+
+</script>
+</body>
