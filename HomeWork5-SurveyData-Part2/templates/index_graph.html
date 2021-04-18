@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <!-- this code is based on https://stackoverflow.com/questions/37640027/add-text-label-to-d3-node-in-force-layout -->
 <script src="static/js/d3.v3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body>
 
 <script>
@@ -21,7 +22,7 @@
     var count = 0;
     for (id in jsonfile){
       if(jsonfile.hasOwnProperty(id)) {
-        var value = {name:jsonfile[id]};
+        var value = {name:jsonfile[id].trim()};
         var group1 = {name:"Males <= 35"}
         var group2 = {name:"Males >= 35"}
         var group3 = {name:"Females <= 35"}
@@ -68,7 +69,10 @@
             // line color
             .style("stroke", "#ccc")
             // line width
-            .style("stroke-width", 1);
+            .style("stroke-width", 1)
+            .on('click', function(d){
+              console.log("hi")
+            });
 
     // dynamically create graph nodes
     var nodes = svg.selectAll("circle")
@@ -85,25 +89,32 @@
             // allow users to drag nodes
             .call(force.drag)
             .on('mouseover', function(d,i){
-              console.log(d.name)
               d3.select(this).transition()
                 .attr("r", 20)
+            })
+            .on('click', function(d,i){
+              for(var k = 0; k < dataset.edges.length; k++){
+                if(dataset.edges[k].target.index == i){
+                  country = dataset.edges[k].source.name
+                  console.log(country,d.name)
+                  $.get('/details/' + country + '/' + d.name, function(response) {
+                    var win=window.open('about:blank');
+                    with(win.document)
+                    {
+                        open();
+                        write(response);
+                        close();
+                        //console.log(status)
+                    }
+
+                      })
+                }
+              }
             })
             .on('mouseout', function(d,i){
               d3.select(this).transition()
                 .attr("r", 10)
                 country = d.name
-                d.get('/details/' + country, function(response) {
-                  var win=window.open('about:blank');
-                  with(win.document)
-                  {
-                      open();
-                      write(response);
-                      close();
-                      //console.log(status)
-                  }
-
-                    })
             });
 
     // dynamically create labels
@@ -138,4 +149,7 @@
     });
 
 </script>
+<div id="dialog-modal" title="Basic modal dialog" style="display:none">
+  <p>hi</p>
+  </div>
 </body>

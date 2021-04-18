@@ -91,6 +91,108 @@ def ontology():
     countries_json = json.dumps(d3_List)
     return render_template('index_graph.html', countries_json=countries_json)
 
+@app.route('/details/<country>/<group>', methods=['GET'])
+def surveyDetailsGraph(country, group):
+
+    d3_toSurveyMapping={'United States of America':'USA',
+    'Switzerland':'Switzerland',
+    'Romania':'Romania',
+    'United Kingdom':'UK',
+    'Colombia':'Colombia',
+    'Canada':'Canada',
+    'Australia':'Australia',
+    'France':'France',
+    'Germany':'Germany',
+    'Cyprus':'Cyprus',
+    'Rwanda':'Rwanda',
+    'Israel':'Israel',
+    'Portugal':'Portugal',
+    'Ireland':'Ireland l',
+    'New Zealand':'New Zealand',
+    'China':'China',
+    'spain':'spain'
+    }
+
+    countryName=d3_toSurveyMapping.get(country)
+    if(group == "Males <= 35"):
+        print(group)
+        group1_list,country_list1= getGroup1Records(countryName)
+
+        group1_clusters=[]
+        group1recordsByCountry=getGroup1RecordsCountbyCountry(countryName)
+        for totalrecords in group1recordsByCountry:
+            if totalrecords[1]>10:
+                kmeans_calc_group=[]
+                for item in group1_list:
+                    if item[1] == totalrecords[0]:
+                        kmeans_calc_group.append(item)
+
+                group_labels = util.cluster_user_data(kmeans_calc_group)
+                group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+                group1_clusters.append(group_clusters)
+        return render_template('surveyDetailsgroup.html',group=group1_list,country_list=group1recordsByCountry,groupKmeans=group1_clusters,countryName=country)
+
+
+    if(group == "Males >= 35"):
+        print(group)
+        group2_list,country_list2= getGroup2Records(countryName)
+
+        group2_clusters=[]
+        group2recordsByCountry=getGroup2RecordsCountbyCountry(countryName)
+        for totalrecords in group2recordsByCountry:
+            if totalrecords[1]>10:
+                kmeans_calc_group=[]
+                for item in group2_list:
+                    if item[1] == totalrecords[0]:
+                        kmeans_calc_group.append(item)
+
+                group_labels = util.cluster_user_data(kmeans_calc_group)
+                group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+                group2_clusters.append(group_clusters)
+        return render_template('surveyDetailsgroup.html',group=group2_list,country_list=group2recordsByCountry,groupKmeans=group2_clusters,countryName=country)
+
+
+
+    if(group == "Females <= 35"):
+        print(group)
+        group3_list,country_list3= getGroup3Records(countryName)
+
+        group3_clusters=[]
+        group3recordsByCountry=getGroup3RecordsCountbyCountry(countryName)
+        for totalrecords in group3recordsByCountry:
+            if totalrecords[1]>10:
+                kmeans_calc_group=[]
+                for item in group3_list:
+                    if item[1] == totalrecords[0]:
+                        kmeans_calc_group.append(item)
+
+                group_labels = util.cluster_user_data(kmeans_calc_group)
+                group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+                group3_clusters.append(group_clusters)
+        return render_template('surveyDetailsgroup.html',group=group3_list,country_list=group3recordsByCountry,groupKmeans=group3_clusters,countryName=country)
+
+
+
+
+    if(group == "Females >= 35"):
+        print(group)
+        group4_list,country_list4= getGroup4Records(countryName)
+
+        group4_clusters=[]
+        group4recordsByCountry=getGroup4RecordsCountbyCountry(countryName)
+        for totalrecords in group4recordsByCountry:
+            if totalrecords[1]>10:
+                kmeans_calc_group=[]
+                for item in group4_list:
+                    if item[1] == totalrecords[0]:
+                        kmeans_calc_group.append(item)
+
+                group_labels = util.cluster_user_data(kmeans_calc_group)
+                group_clusters = util.split_user_data(kmeans_calc_group,group_labels)
+                group4_clusters.append(group_clusters)
+        return render_template('surveyDetailsgroup.html',group=group4_list,country_list=group4recordsByCountry,groupKmeans=group4_clusters,countryName=country)
+
+
 
 @app.route('/details/<country>', methods=['GET'])
 def surveyDetails(country):
