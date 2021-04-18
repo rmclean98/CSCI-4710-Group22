@@ -45,22 +45,27 @@
 <img src="/static/logo.png" width= 600px height =90px />
 
 
-{% set temp=session['username']|tojson %}
+{% set username=session['username']|tojson %}
 {% if session['username']|string() =="Guest" %} 
 <div class='sidebar' style="float:right; display: inline-block; padding-top:20px;"> 
   <button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round"  >Login</button> to Post ads.<BR>
   </div>
 {%  else %}
 <div class='sidebar' style="float:right; display: inline-block; padding-top:20px;"> 
-<button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round" onClick="location.href='/classifieds/logout'" >logout</button>
+<button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round" onClick="location.href='/classifieds/logout'" >Logout</button>
 </div>
 
+<div class='sidebar' style="float:left; display: flex;display: inline-block; padding-top:20px;"> 
+  <H3 style="color:rgb(18, 13, 95)">Welcome <BR></H3>  
+     <p style="color:rgb(6, 77, 41)"><b>{{username}}!!! </b></p> 
+   </div>
 
 {% endif  %}
 </div>
 
 </div>
 
+<BR>
 
 <div  class="container-fluid" style="border-style: ridge;">
 <div>

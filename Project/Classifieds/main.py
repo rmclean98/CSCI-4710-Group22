@@ -46,7 +46,7 @@ def signup():
         
         createUser(request)    
         
-        confirmMessage1='Aww yeah, your registration is completed successfully!!!'
+        confirmMessage1='Hurrah, your registration is completed successfully!!!'
         confirmMessage2='Please login with your user credentials from the homepage.'
         redirection='/classifieds'
         return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection) 
@@ -58,7 +58,28 @@ def signup():
     
     #return resp
 
+@app.route('/classifieds/updateprofile', methods=['POST'])
+def updateProfile():        
+    
 
+    
+
+
+    if  request.method =='POST':
+        
+        updateUser(request)    
+        
+        confirmMessage1='Hurrah, your profile is updated successfully!!!'
+        confirmMessage2='Please verify if your profile information is displayed correctly the homepage.'
+        redirection='/classifieds'
+        return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection) 
+        #return redirect(url_for('home')) 
+           
+            #resp =make_response(render_template('index.html',recentAdslist=recentAdslist))
+             
+
+    
+    #return resp
 
 
 @app.route('/classifieds/login/', methods=['POST'])
@@ -142,7 +163,8 @@ def home():
     else:
         recentAdslist=getRecentAds()
         myAdsList=getMyAds(session['username'])
-        resp =make_response(render_template('home.html',session_variable=str(session['username']),recentAdsList=recentAdslist,myAdsList=myAdsList))
+        profileInfo=getUserDetails(session['username'])
+        resp =make_response(render_template('home.html',session_variable=str(session['username']),recentAdsList=recentAdslist,myAdsList=myAdsList,profileInfo=profileInfo))
         resp.set_cookie('Authenticated', 'Yes')
         
     return resp
@@ -228,7 +250,7 @@ def postad():
                 #resp =make_response(render_template('home.html',session_variable1=str(session['username']),recentAdslist=recentAdslist,myAdsList=myAdsList))
                 #resp.set_cookie('adPosted', 'Yes')
 
-                confirmMessage1='Aww yeah, your Ad is posted successfully!!!'
+                confirmMessage1='Hurrah, your Ad is posted successfully!!!'
                 confirmMessage2='Please verify if your Ad is displayed correctly in MyAds page'
                 redirection='/classifieds'
                 return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection) 
@@ -320,6 +342,39 @@ def getAdDetails(adId):
 
 
 
+def getUserDetails(username):
+
+    #records=AdDetails.query.with_entities(AdDetails.adTitle,AdDetails.adDescription,AdDetails.adType,AdDetails.expectedPrice,AdDetails.payFrequency,AdDetails.postedDate,AdDetails.adId).filter(AdDetails.adId==adId).all()
+    #userId=AdsList.query.with_entities(AdsList.userId).filter(AdsList.adId==adId).all()
+    userId=Register.query.with_entities(Register.userId).filter(Register.emailId==username).all()
+    password=Register.query.with_entities(Register.password).filter(Register.emailId==username).all()
+    userRecord=UserDetails.query.with_entities(UserDetails.fname,UserDetails.lname,UserDetails.dob,UserDetails.address,UserDetails.city,UserDetails.state,UserDetails.country,UserDetails.zip,UserDetails.phone).filter(UserDetails.userId==userId[0][0]).all()
+        
+    list1=[]
+    list2=[]   
+    
+
+
+    for record in userRecord:
+        list1=[]
+        list1.append(username)         
+        list1.append(record.fname)
+        list1.append(record.lname)
+        list1.append(record.dob)
+        list1.append(record.address)
+        list1.append(record.city)
+        list1.append(record.state)
+        list1.append(record.country)
+        list1.append(record.zip)  
+        list1.append(record.phone)   
+        list1.append(password[0][0])                   	
+        list2.append(list1)
+
+
+    return list2
+
+
+
 def createAd(username,request,filepath):
 
     postedDate=datetime.strptime(request.form.get('datepicker'), '%m%d%Y')
@@ -352,6 +407,35 @@ def createUser(request):
     userdetails=UserDetails(userId=register.userId,fname=request.form.get('Fname'),lname=request.form.get('Lname'),dob=postedDate,address=request.form.get('Address'),city=request.form.get('City'),state=request.form.get('State'),country=request.form.get('Country'),zip=request.form.get('Zip'),phone=request.form.get('Phone')) 
     db1.session.add(userdetails)
     db1.session.commit()
+
+
+
+def updateUser(request):
+
+    postedDate=datetime.strptime(request.form.get('datepicker'), '%Y-%m-%d')
+    userRecords=Register.query.filter(Register.emailId==request.form.get('Email')).all()
+
+    for userRecord in userRecords:
+        userRecord.emailId=request.form.get('Email')
+        userRecord.password=request.form.get('Password')     
+        db1.session.commit()
+    
+    
+    userdetails=UserDetails.query.filter(UserDetails.userId==userRecord.userId).all()
+
+    for userdetail in userdetails:
+
+        userdetail.fname=request.form.get('Fname')
+        userdetail.lname=request.form.get('Lname')
+        userdetail.dob=postedDate
+        userdetail.address=request.form.get('Address')
+        userdetail.city=request.form.get('City')
+        userdetail.state=request.form.get('State')
+        userdetail.country=request.form.get('Country')
+        userdetail.zip=request.form.get('Zip')
+        userdetail.phone=request.form.get('Phone')     
+        db1.session.commit()
+
     
 
     

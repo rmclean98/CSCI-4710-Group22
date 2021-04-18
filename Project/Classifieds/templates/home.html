@@ -44,23 +44,26 @@
 <div align='center' class='logo' >
 <img src="/static/logo.png" width= 600px height =90px />
 
-{% set temp=session['username']|tojson %}
+{% set username=session['username']|tojson %}
 {% if session['username']|string() =="Guest" %} 
 <div class='sidebar' style="float:right; display: inline-block; padding-top:20px;"> 
   <button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round"  >Login</button> to Post ads.<BR>
   </div>
 {%  else %}
 <div class='sidebar' style="float:right; display: inline-block; padding-top:20px;"> 
-<button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round" onClick="location.href='/classifieds/logout'" >logout</button>
+<button id="login_button" type="button" style="width:200px;" class="btn btn-info btn-block btn-round" onClick="location.href='/classifieds/logout'" >Logout</button>
 </div>
 
-
+<div class='sidebar' style="float:left; display: flex;display: inline-block; padding-top:20px;"> 
+ <H3 style="color:rgb(18, 13, 95)">Welcome <BR></H3>  
+    <p style="color:rgb(6, 77, 41)"><b>{{username}}!!! </b></p> 
+  </div>
 {% endif  %}
 
 
 </div>
 
-
+<BR>
 
 </div>
 
@@ -69,8 +72,9 @@
   <ul class="nav nav-tabs">
     <li class="active settingshead"><a href="#first" data-toggle="tab">Search Ads</a></li>
     <li class="settingshead"><a href="#second" data-toggle="tab">Post Ad</a></li>
-    <li class="settingshead"><a href="#third" data-toggle="tab">My Ads</a></li>
-    <li class="settingshead"><a href="#fourth" data-toggle="tab">Recent Ads</a></li>
+    <li class="settingshead"><a href="#third" data-toggle="tab">My Profile</a></li>
+    <li class="settingshead"><a href="#fourth" data-toggle="tab">My Ads</a></li>
+    <li class="settingshead"><a href="#fifth" data-toggle="tab">Recent Ads</a></li>
     
   </ul>
 </div>
@@ -170,7 +174,91 @@
  		</FORM>
  		</div>
   </div>
+
+
   <div class="tab-pane" id="third">
+    <div  class='main'>
+  <H2>Profile Information:</H2> 
+  
+  <FORM ACTION="/classifieds/updateprofile" METHOD="POST" enctype='Application/x-www-form-urlencoded'>
+        
+            
+    Email Id:
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Email" value={{profileInfo[0][0]}}> 
+  <BR>
+  <BR>
+   First Name:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px"  class="form-control" NAME="Fname" value={{profileInfo[0][1]}}> 
+  <BR>
+  <BR>
+Last Name:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="Lname" value={{profileInfo[0][2]}}> 
+  <BR>
+  <BR>
+Date of Birth:(MMDDYYYY)
+   <input type="text" name="datepicker" id="datepicker" class="form-control" style="width:150px" value={{profileInfo[0][3]}}>
+   <BR>
+<BR>
+Address:    
+  <BR>
+  <textarea style="width:500px" NAME="Address" class="form-control"> {{profileInfo[0][4]}} </textarea>
+  <!--  <INPUT TYPE="TEXT" maxlength="3000"  NAME="Description"> -->   
+  <BR>
+  <BR>
+City:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px"  class="form-control" NAME="City" value={{profileInfo[0][5]}}> 
+  <BR>
+<BR>
+  State:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="State" value={{profileInfo[0][6]}}> 
+  <BR>            
+<BR>
+  Country:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Country" value={{profileInfo[0][7]}}> 
+  <BR>            
+<BR>
+  Zip:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control" NAME="Zip" value={{profileInfo[0][8]}}> 
+  <BR>
+  <BR>
+  
+  Phone:           
+  <BR>
+  <INPUT TYPE="TEXT" maxlength="300" style="width:400px" class="form-control"  NAME="Phone" value={{profileInfo[0][9]}}> 
+  <BR>
+  <BR>
+
+<div>
+<label for="pass">Password (8 characters minimum):</label>
+<input type="password" id="pass" class="form-control" name="Password"
+ minlength="8" required  maxlength="30" style="width:400px" value={{profileInfo[0][10]}}>
+</div>
+                 <!-- <div id="calendar">
+  <p id="calendar-day"></p>
+  <p id="calendar-date"></p>
+  <p id="calendar-month-year"></p> 
+ </div> -->
+<BR>
+<BR>
+
+  <INPUT  TYPE="SUBMIT" style="margin-left: 100px; width: 325px; margin-left:400px" class="btn btn-info btn-block btn-round" value="Update">
+  <BR>
+  <BR>
+</FORM>
+       <BR>		
+   </div>
+   <BR>
+</div>
+
+
+  <div class="tab-pane" id="fourth">
     <div class='main'>
       <H2>My Classifieds: </H2> 
       <H3 style="color:#0000ff">View/Edit/Delete details of the Ad in new tab by clicking on the details link</H3>
@@ -243,14 +331,7 @@
   </div>
   
 
-
-
-
- <BR>
- <BR>
-
-
-  <div class="tab-pane" id="fourth">
+  <div class="tab-pane" id="fifth">
     <div class='main'>
       <H2>Recent Classifieds: </H2> 
       <H3 style="color:#0000ff">View full details of the Ad in new tab by clicking on the details link</H3>
