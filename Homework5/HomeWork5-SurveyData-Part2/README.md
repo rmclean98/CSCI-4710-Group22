@@ -2,6 +2,17 @@ Example 39: This project shows how to integrate a database in your web app.
 
 ## Quick Start
 ### Local Test Setup
+There is no setup required for the database if you have the requirements installed then, the python file will create the database locally.
+
+The required libraries are:
+```
+Flask==1.0.2
+Jinja2==2.10
+flask-sqlalchemy
+sklearn
+```
+They are in requirements.txt which will help with easy of install.
+
 First, we need to install a Python 3 virtual environment with:
 ```
 sudo apt update
