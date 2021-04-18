@@ -8,7 +8,6 @@
     var w = 2500;
     var h = 2000;
     var jsonfile =JSON.parse({{countries_json|tojson|safe}});
-    console.log(jsonfile)
     // this part should be updated using GET request (get from your backend)
     // input topics as nodes
     // define links as edges, e.g. if you have 5 topics
@@ -33,7 +32,6 @@
       }
     }
 
-    console.log(dataset)
     // Constructs a new force-directed layout, used for graph a lot
     var force = d3.layout.force()
                 // the nodes of a graph
@@ -85,7 +83,28 @@
               return colors(i);
             })
             // allow users to drag nodes
-            .call(force.drag);
+            .call(force.drag)
+            .on('mouseover', function(d,i){
+              console.log(d.name)
+              d3.select(this).transition()
+                .attr("r", 20)
+            })
+            .on('mouseout', function(d,i){
+              d3.select(this).transition()
+                .attr("r", 10)
+                country = d.name
+                d.get('/details/' + country, function(response) {
+                  var win=window.open('about:blank');
+                  with(win.document)
+                  {
+                      open();
+                      write(response);
+                      close();
+                      //console.log(status)
+                  }
+
+                    })
+            });
 
     // dynamically create labels
     var label = svg.selectAll(".mytext")
