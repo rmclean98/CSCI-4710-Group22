@@ -112,7 +112,54 @@
                 <BR>
                 <INPUT  style="margin-left: 100px; width: 325px; margin-left:400px" class="btn btn-info btn-block btn-round"  TYPE="SUBMIT" value="Submit">
          </FORM> 
-         <BR>		
+         <BR>
+         
+         <H3 style='background-color:rgb(241, 115, 199)'>Searched Posts:</H3>
+   <div class="table-responsive" id="dataTablediv1"> 
+   <table class="table table-striped table-bordered" id="dataTable1">
+     <thead>
+       <tr>
+       <caption style='background-color:rgb(156, 151, 223)'>Searched Advertisements posted by users are displayed here
+         </caption>
+       </tr>
+       <tr>        
+         <!-- <th>Index</th> -->
+        <th>SNo</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Expected Price</th>
+        <th>Payment Frequency</th>
+        <th>Posted Date</th>
+        <th>Details</th>        
+      </tr>
+     </thead>
+     <tbody>
+       {% set count = namespace(value=1) %} 
+       {% for advt in searchAdsList %}  
+            
+     <tr>
+     <td>{{count.value}}</td> 
+             
+                     
+          
+     <td>{{ advt[0] }}</td> 
+     <td>{{ advt[1] }}</td> 
+     <td>{{ advt[2] }}</td> 
+     <td>{{ advt[3] }}</td> 
+     <td>{{ advt[4] }}</td> 
+    
+     {% set adId = '' %}     
+       {% set adId = "/classifieds/adId/" + advt[5]|string %} 
+         <td><a href={{adId}} target="_blank" >view</a></td> 
+         {% set count.value = count.value + 1 %} 
+               
+         </tr>           
+   
+        {% endfor %}
+     
+     </tbody>
+     </table>
+   </div>		
      </div>
      <BR>
   </div>

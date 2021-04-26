@@ -182,11 +182,26 @@ def viewAd(adId):
 
 @app.route('/classifieds/edit/adId/<adId>', methods=['GET', 'POST'])
 def editAd(adId):
+	
+	print(adId)
+	adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
+	adRecords = AdDetails.query.filter(AdDetails.adId==adId).all()
+    
+	print(adRecords)
+	print(request.form.get('title'))
+    
+	for record in adRecords:
+		print(record)
+		record.adTitle = request.form.get('title')
+		record.adDescription = request.form.get('desc')
+		#record.adType = request.form.get('')
+		record.expectedPrice = request.form.get('price')
+		record.payFrequency = request.form.get('freq')
+		record.postedDate = request.form.get('date')
+		db1.session.commit()
 
-    adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
-    print(adDetailRecord)
-
-    return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
+		
+	return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
 
 
 @app.route('/classifieds/delete/adId/<adId>', methods=['GET', 'POST'])
@@ -295,16 +310,34 @@ def postad():
 
 
 
-@app.route('/classifieds/search', methods=['GET'])
+@app.route('/search_classifieds', methods=['POST'])
 def adSearch():
 
+    if 'username' not in session:
+        session['username']='Guest'
+        recentAdslist=getRecentAds()
+        searchads = getSearchAds(request)
+        resp =make_response(render_template('index.html',session_variable=str(session['username']),searchAdsList=searchads,recentAdsList=recentAdslist))
+        resp.set_cookie('Authenticated', 'No')
 
-    app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
+    elif session['username']=='Guest':
+        recentAdslist=getRecentAds()
+        searchads = getSearchAds(request)
+        resp =make_response(render_template('index.html',session_variable=str(session['username']),searchAdsList=searchads,recentAdsList=recentAdslist))
+        resp.set_cookie('Authenticated', 'No')
 
-    group1_list,country_list1= getGroup1Records()
-    group2_list,country_list2= getGroup2Records()
-    group3_list,country_list3= getGroup3Records()
-    group4_list,country_list4= getGroup4Records()
+    else:
+        recentAdslist=getRecentAds()
+        searchads = getSearchAds(request)
+        myAdsList=getMyAds(session['username'])
+        profileInfo=getUserDetails(session['username'])
+        resp =make_response(render_template('home.html',session_variable=str(session['username']),searchAdsList=searchads,recentAdsList=recentAdslist,myAdsList=myAdsList,profileInfo=profileInfo))
+        resp.set_cookie('Authenticated', 'Yes')
+
+    return resp
+    #return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2)
+
+
 
 
     return render_template('index.html',group1=group1_list,country_list1=country_list1,group2=group2_list,country_list2=country_list2,group3=group3_list,country_list3=country_list3,group4=group4_list,country_list4=country_list4)
@@ -459,6 +492,24 @@ def updateUser(request):
 
 
 
+def getSearchAds(request):
+    records=AdDetails.query.with_entities(AdDetails.adTitle,AdDetails.adType,AdDetails.expectedPrice,AdDetails.postedDate,AdDetails.payFrequency,AdDetails.adId).filter(AdDetails.adType.like(request.form.get('Ad_Type'))).filter((AdDetails.adTitle.like("%" + request.form.get('Search_for_Keyword') + "%")) | (AdDetails.adDescription.like("%" + request.form.get('Search_for_Keyword') + "%"))).all()
+    print(records)
+    print(request.form.get('Ad_Type'))
+    #records=surveyUser.query.filter(temp1).filter(temp2).all()
+    list1=[]
+
+    for record in records:
+        list2=[]
+        list2.append(record.adTitle)
+        list2.append(record.adType)
+        list2.append(record.expectedPrice)
+        list2.append(record.postedDate)
+        list2.append(record.payFrequency)
+        list2.append(record.adId)
+        list1.append(list2)
+
+    return list1
 
 
 
