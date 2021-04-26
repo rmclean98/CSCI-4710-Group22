@@ -213,8 +213,14 @@ def editAd(adId):
             
             db1.session.commit()
 
+
+        confirmMessage1='Hurrah, your Ad is updated successfully!!!'
+        confirmMessage2='Please verify if your Ad information is displayed correctly in the homepage.'
+        redirection='/classifieds'
+        return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection)
+
             
-        return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
+        #return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
 
 
 @app.route('/classifieds/delete/adId/<adId>', methods=['GET', 'POST'])
