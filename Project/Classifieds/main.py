@@ -182,26 +182,39 @@ def viewAd(adId):
 
 @app.route('/classifieds/edit/adId/<adId>', methods=['GET', 'POST'])
 def editAd(adId):
-	
-	print(adId)
-	adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
-	adRecords = AdDetails.query.filter(AdDetails.adId==adId).all()
-    
-	print(adRecords)
-	print(request.form.get('title'))
-    
-	for record in adRecords:
-		print(record)
-		record.adTitle = request.form.get('title')
-		record.adDescription = request.form.get('desc')
-		#record.adType = request.form.get('')
-		record.expectedPrice = request.form.get('price')
-		record.payFrequency = request.form.get('freq')
-		record.postedDate = request.form.get('date')
-		db1.session.commit()
 
-		
-	return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
+    adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
+    adRecords = AdDetails.query.filter(AdDetails.adId==adId).all()
+
+
+    if  request.method =='GET':
+        #adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
+        #adRecords = AdDetails.query.filter(AdDetails.adId==adId).all()
+
+        return render_template('editad.html',adDetailRecord=adDetailRecord,adFilesList=adFilesList)
+
+
+    if  request.method =='POST':
+        print(adId)
+        #adRecords = AdDetails.query.filter(AdDetails.adId==adId).all()
+        
+        
+        print(adRecords)
+        print(request.form.get('title'))
+        
+        for record in adRecords:
+            print(record)
+            record.adTitle = request.form.get('title')
+            record.adDescription = request.form.get('desc')
+            #record.adType = request.form.get('')
+            record.expectedPrice = request.form.get('price')
+            record.payFrequency = request.form.get('freq')
+            record.postedDate =datetime.strptime(request.form.get('date'), '%Y-%m-%d')
+            
+            db1.session.commit()
+
+            
+        return render_template('editad.html',adDetailRecord=adDetailRecord,userRecord=userRecord,adFilesList=adFilesList)
 
 
 @app.route('/classifieds/delete/adId/<adId>', methods=['GET', 'POST'])
