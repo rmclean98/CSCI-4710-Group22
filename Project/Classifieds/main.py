@@ -227,10 +227,18 @@ def editAd(adId):
 def deleteAd(adId):
 
     adDetailRecord,userRecord,adFilesList=getAdDetails(adId)
-    x = len(adDetailRecord) - 1
-    db1.session.delete(adDetailRecord[x])
+    adRecordsdetail = AdDetails.query.filter(AdDetails.adId==adId)
+    adRecordsdetail.delete()
+    adRecordslist = AdsList.query.filter(AdsList.adId==adId)
+    adRecordslist.delete()
 
-    return render_template('/classifieds')
+    db1.session.commit()
+
+    confirmMessage1='Hurrah, your Ad is updated successfully!!!'
+    confirmMessage2='Please verify if your Ad information is displayed correctly in the homepage.'
+    redirection='/classifieds'
+    return render_template('confirmation.html',confirmMessage1=confirmMessage1,confirmMessage2=confirmMessage2,redirection=redirection)
+
 
 
 
